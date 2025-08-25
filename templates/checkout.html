@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <h2 class="mb-4">Finalizar Compra</h2>
+        
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Resumen de tu pedido</h5>
+                <p class="card-text">Total a pagar: <strong>${{ "%.2f"|format(total) }}</strong></p>
+                
+                <form method="POST" action="{{ url_for('checkout') }}">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre Completo</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Correo Electrónico</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Confirmar Pedido</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

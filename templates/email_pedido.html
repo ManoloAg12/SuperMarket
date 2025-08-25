@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmación de Pedido #{{ pedido.codigo_pedido }}</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background-color: #007bff; color: white; padding: 10px; text-align: center; }
+        .content { padding: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .total { font-weight: bold; font-size: 1.2em; }
+        .qr-code { text-align: center; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>SuperMarket</h1>
+            <h2>Confirmación de Pedido #{{ pedido.codigo_pedido }}</h2>
+        </div>
+        
+        <div class="content">
+            <p>Hola {{ pedido.cliente_nombre }},</p>
+            <p>Gracias por tu compra en nuestro supermercado. Aquí tienes los detalles de tu pedido:</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Precio Unitario</th>
+                        <th>Cantidad</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in carrito %}
+                    <tr>
+                        <td>{{ item.nombre }}</td>
+                        <td>${{ "%.2f"|format(item.precio) }}</td>
+                        <td>{{ item.cantidad }}</td>
+                        <td>${{ "%.2f"|format(item.precio * item.cantidad) }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" class="total">Total:</td>
+                        <td class="total">${{ "%.2f"|format(pedido.total) }}</td>
+                    </tr>
+                </tfoot>
+            </table>
+            
+            <div class="qr-code">
+                <h3>Código QR para la cajera</h3>
+                <p>Escanea el siguiente código QR para procesar tu pedido que se encuentra en la imagen adjunta:</p>
+                <p>O muestra este código: <strong>{{ pedido.codigo_pedido }}</strong></p>
+            </div>
+            
+            <p>Fecha del pedido: {{ pedido.fecha.strftime('%d/%m/%Y %H:%M') }}</p>
+            <p>Si tienes alguna pregunta, no dudes en contactarnos.</p>
+            <p>¡Gracias por comprar con nosotros!</p>
+        </div>
+    </div>
+</body>
+</html>

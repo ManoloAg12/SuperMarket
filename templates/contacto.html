@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="contact-container">
+    <section class="contact-hero">
+        <div class="hero-overlay">
+            <h1 class="hero-title">Contáctanos</h1>
+            <p class="hero-subtitle">Estamos aquí para ayudarte</p>
+        </div>
+    </section>
+
+    <section class="contact-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2 class="section-title">Información de Contacto</h2>
+                    <div class="contact-info">
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Dirección</h4>
+                                <p>Centro Comercial Plaza Futura, Séptima Calle Oriente, entre Quinta y Séptima Avenida, Santa Ana centro, Santa Ana, El Salvador</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <div>
+                                <h4>Teléfono General</h4>
+                                <p>+503 2278-9000</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>Correo Electrónico</h4>
+                                <p>info@supermarket.com.sv</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h4>Horario de Atención</h4>
+                                <p>Lunes a Viernes: 8:00 AM - 6:00 PM<br>
+                                Sábados: 8:00 AM - 12:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <h2 class="section-title">Formulario de Contacto</h2>
+                    <form class="contact-form">
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Nombre Completo</label>
+                            <input type="text" class="form-control" id="nombre" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Correo Electrónico</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="telefono" class="form-label">Teléfono (opcional)</label>
+                            <input type="tel" class="form-control" id="telefono">
+                        </div>
+                        <div class="mb-3">
+                            <label for="mensaje" class="form-label">Mensaje</label>
+                            <textarea class="form-control" id="mensaje" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enviar Mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="team-contact">
+        <div class="container">
+            <h2 class="section-title">Contacta Directamente a Nuestro Equipo</h2>
+            <div class="team-grid">
+                {% for miembro in equipo %}
+                <div class="team-member">
+                    <div class="member-avatar" 
+                         style="background-image: url('https://ui-avatars.com/api/?name={{ miembro.nombre.split()[0] }}+{{ miembro.nombre.split()[1] }}&size=150&background={{ miembro.color }}&color=fff')"></div>
+                    <h3>{{ miembro.nombre }}</h3>
+                    <div class="member-contact">
+                        <p><i class="fas fa-phone"></i> {{ miembro.telefono }}</p>
+                        <p><i class="fas fa-envelope"></i> {{ miembro.email }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

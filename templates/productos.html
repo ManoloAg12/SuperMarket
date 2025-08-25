@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="mb-4">Productos - {{ categoria.nombre }}</h2>
+        <a href="{{ url_for('index') }}" class="btn btn-secondary mb-3">Volver a categorías</a>
+    </div>
+</div>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for producto in productos %}
+    <div class="col">
+        <div class="card h-100">
+            <img src="{{ url_for('static', filename='images/' + producto.imagen) if producto.imagen else 'https://via.placeholder.com/300x180?text=Producto' }}" 
+                 class="card-img-top" 
+                 alt="{{ producto.nombre }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ producto.nombre }}</h5>
+                <p class="card-text">${{ "%.2f"|format(producto.precio) }}</p>
+                <p class="card-text">Cantidad en Stock: {{ producto.stock }}</p>
+
+                <form method="POST" action="{{ url_for('agregar_al_carrito', producto_id=producto.id) }}" class="mt-auto">
+                    <div class="mb-3">
+                        <label for="cantidad-{{ producto.id }}" class="form-label">Cantidad:</label>
+                        <input type="number" 
+                               class="form-control" 
+                               id="cantidad-{{ producto.id }}" 
+                               name="cantidad" 
+                               value="1" 
+                               min="1" 
+                               max="{{ producto.stock }}">
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-cart-plus me-1"></i> Agregar al carrito
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

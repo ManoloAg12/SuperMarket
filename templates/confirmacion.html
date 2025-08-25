@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 text-center">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title">¡Gracias por tu compra, {{ pedido.cliente_nombre }}!</h2>
+                <p class="card-text">Tu pedido ha sido registrado con el código: <strong>{{ pedido.codigo_pedido }}</strong></p>
+                <p class="card-text">Hemos enviado un correo a <strong>{{ pedido.cliente_email }}</strong> con los detalles de tu compra.</p>
+                
+                <div class="my-4">
+                    <h5>Código QR para la cajera:</h5>
+                    <img src="data:image/png;base64,{{ qr_img }}" alt="Código QR del pedido" class="img-fluid" style="max-width: 200px;">
+                    <p class="mt-2">O muestra este código: <strong>{{ pedido.codigo_pedido }}</strong></p>
+                </div>
+                
+                <div class="mt-4">
+                    <a href="{{ url_for('index') }}" class="btn btn-primary">Volver al inicio</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

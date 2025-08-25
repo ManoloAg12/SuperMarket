@@ -1,0 +1,2 @@
+Instalar las dependencias atravez de 
+pip install -r requirements.txt
